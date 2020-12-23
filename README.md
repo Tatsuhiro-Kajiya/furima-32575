@@ -28,7 +28,7 @@
 | shopping-cost_id                    | integer    | null: false       |
 | prefecture_id                       | integer    | null: false       |
 | shopping-days_id                    | integer    | null: false       |
-| price                               | string     | null: false       |
+| price                               | integer    | null: false       |
 | user                                | references | foreign_key: true |
 
 ### Association
@@ -63,4 +63,4 @@
 
 ### Association
 
-- belongs_to :addresses
+- belongs_to :buy
