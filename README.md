@@ -3,13 +3,13 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | nickname           | string              | null: false             |
-| email              | string              | null: false             |
-| password           | string              | null: false             |
+| email              | string              | unique: true            |
+| encrypted_password | string              | null: false             |
 | last-name          | string              | null: false             |
 | first-name         | string              | null: false             |
 | last-name-kana     | string              | null: false             |
 | first-name-kana    | string              | null: false             |
-| birthday           | string              | null: false             |
+| birthday           | date                | null: false             |
 
 
 ### Association
@@ -21,13 +21,13 @@
 
 | Column                              | Type       | Options           |
 |-------------------------------------|------------|-------------------|
-| product-name                        | string     | null: false       |
+| name                                | string     | null: false       |
 | explanation                         | text       | null: false       |
-| category                            | string     | null: false       |
-| state                               | string     | null: false       |
-| shopping-cost                       | string     | null: false       |
-| area                                | string     | null: false       |
-| shopping-days                       | string     | null: false       |
+| category_id                         | integer    | null: false       |
+| state_id                            | integer    | null: false       |
+| shopping-cost_id                    | integer    | null: false       |
+| prefecture_id                       | integer    | null: false       |
+| shopping-days_id                    | integer    | null: false       |
 | price                               | string     | null: false       |
 | user                                | references | foreign_key: true |
 
@@ -40,19 +40,27 @@
 
 | Column            | Type       | Options           |
 |-------------------|------------|-------------------|
-| card              | string     | null: false       |
-| expiration-date   | string     | null: false       |
-| security-code     | string     | null: false       |
-| postal-code       | string     | null: false       |
-| prefecture        | string     | null: false       |
-| city              | string     | null: false       |
-| lot-number        | string     | null: false       |
-| building-number   | string     | null: false       |
-| phone-number      | string     | null: false       |
-| item              | references | foreign_key: true |
 | user              | references | foreign_key: true |
+| item              | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
+- has_one :address
+
+
+## addresses table
+
+| Column            | Type       | Options           |
+|-------------------|------------|-------------------|
+| postal-code       | string     | null: false       |
+| prefecture_id     | integer    | null: false       |
+| city              | string     | null: false       |
+| lot-number        | string     | null: false       |
+| building-number   | string     |                   |
+| phone-number      | string     | null: false       |
+
+### Association
+
+- belongs_to :addresses
