@@ -60,6 +60,7 @@
 | lot_number        | string     | null: false       |
 | building_number   | string     |                   |
 | phone_number      | string     | null: false       |
+| buy               | references | foreign_key: true |
 
 ### Association
 
