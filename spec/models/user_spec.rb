@@ -37,13 +37,9 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it "パスワードは、確認用を含めて2回入力すること" do
-        @user.password = "123456"
-        @user.encrypted_password = "123456"
         expect(@user).to be_valid
       end
       it "パスワードとパスワード(確認用)、値の一致している" do
-        @user.password = "123456"
-        @user.encrypted_password = "123456"
         expect(@user).to be_valid
       end
       it "ユーザー本名は、名字が登録できる" do
@@ -108,14 +104,14 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it "パスワードが空だと登録できない" do
-        @user.email = ""
+        @user.password = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email can't be blank")
+        expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it "パスワードは半角英数字混合でない場合、登録できない" do
-        @user.email = "aaaaaaa"
+        @user.password = "aaaaaa"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include("Password is invalid. Input Cannot be registered with a mixture of half-width alphanumeric characters ")
       end
       it "パスワードが5文字以下であれば登録できない" do
         @user.password = "12345"
@@ -154,7 +150,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
-
       it "ユーザー本名(名字)は数字では登録できない" do
         @user.last_name = "123"
         @user.valid?
