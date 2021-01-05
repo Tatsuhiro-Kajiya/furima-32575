@@ -10,10 +10,6 @@ RSpec.describe Item, type: :model do
       it "全てが揃っていれば登録できること" do
         expect(@item).to be_valid
       end
-      it "販売価格が¥300~¥9999999の間だと出品できる" do
-        @item.price_id = "300"
-        expect(@item).to be_valid
-      end
     end
 
     context '商品出品がうまくいかない時' do
@@ -32,28 +28,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
-      it "カテゴリーが空だと出品できない" do
-        @item.category_id = ""
+      it "カテゴリーが1だと出品できない" do
+        @item.category_id = "id: 1"
         @item.valid?
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
-      it "商品の状態が空だと出品できない" do
-        @item.state_id = ""
+      it "商品の状態が1だと出品できない" do
+        @item.state_id = "id: 1"
         @item.valid?
         expect(@item.errors.full_messages).to include("State is not a number")
       end
-      it "配送料の負担が空だと出品できない" do
-        @item.shopping_cost_id = ""
+      it "配送料の負担が1だと出品できない" do
+        @item.shopping_cost_id = "id: 1"
         @item.valid?
         expect(@item.errors.full_messages).to include("Shopping cost is not a number")
       end
-      it "発送元の地域が空だと出品できない" do
-        @item.prefecture_id = ""
+      it "発送元の地域が0だと出品できない" do
+        @item.prefecture_id = "id: 0"
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture is not a number")
       end
-      it "発送までの日数が空だと出品できない" do
-        @item.shopping_days_id = ""
+      it "発送までの日数が1だと出品できない" do
+        @item.shopping_days_id = "id: 1"
         @item.valid?
         expect(@item.errors.full_messages).to include("Shopping days is not a number")
       end
