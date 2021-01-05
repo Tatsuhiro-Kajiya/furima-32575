@@ -29,29 +29,29 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
       it "カテゴリーが1だと出品できない" do
-        @item.category_id = "id: 1"
+        @item.category_id = "1"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category is not a number")
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it "商品の状態が1だと出品できない" do
-        @item.state_id = "id: 1"
+        @item.state_id = "1"
         @item.valid?
-        expect(@item.errors.full_messages).to include("State is not a number")
+        expect(@item.errors.full_messages).to include("State must be other than 1")
       end
       it "配送料の負担が1だと出品できない" do
-        @item.shopping_cost_id = "id: 1"
+        @item.shopping_cost_id = "1"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shopping cost is not a number")
+        expect(@item.errors.full_messages).to include("Shopping cost must be other than 1")
       end
       it "発送元の地域が0だと出品できない" do
-        @item.prefecture_id = "id: 0"
+        @item.prefecture_id = "0"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture is not a number")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
       end
       it "発送までの日数が1だと出品できない" do
-        @item.shopping_days_id = "id: 1"
+        @item.shopping_days_id = "1"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shopping days is not a number")
+        expect(@item.errors.full_messages).to include("Shopping days must be other than 1")
       end
       it "販売価格が空だと出品できない" do
         @item.price_id = ""
