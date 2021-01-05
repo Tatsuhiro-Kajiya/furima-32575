@@ -10,6 +10,10 @@ RSpec.describe Item, type: :model do
       it "全てが揃っていれば登録できること" do
         expect(@item).to be_valid
       end
+      it "販売価格が¥300~¥9999999の間だと出品できる" do
+        @item.price_id = "300"
+        expect(@item).to be_valid
+      end
     end
 
     context '商品出品がうまくいかない時' do
@@ -65,6 +69,11 @@ RSpec.describe Item, type: :model do
       end
       it "販売価格が漢字だと出品できない" do
         @item.price_id = "一二三四五六"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width numbers.")
+      end
+      it "販売価格が¥300~¥9999999の間以外だと出品できない" do
+        @item.price_id = "100"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width numbers.")
       end

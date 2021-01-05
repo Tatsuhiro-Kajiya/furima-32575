@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :explanation
-    validates :price_id, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width numbers." }
+    validates :price_id, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width numbers.",  greater_than_or_equal_to:300 ,less_than_or_equal_to:9999999}
     validates :image
   end
   with_options numericality: { other_then: 1 } do
