@@ -29,27 +29,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
       it "カテゴリーが1だと出品できない" do
-        @item.category_id = "1"
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it "商品の状態が1だと出品できない" do
-        @item.state_id = "1"
+        @item.state_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("State must be other than 1")
       end
       it "配送料の負担が1だと出品できない" do
-        @item.shopping_cost_id = "1"
+        @item.shopping_cost_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shopping cost must be other than 1")
       end
       it "発送元の地域が0だと出品できない" do
-        @item.prefecture_id = "0"
+        @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
       end
       it "発送までの日数が1だと出品できない" do
-        @item.shopping_days_id = "1"
+        @item.shopping_days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shopping days must be other than 1")
       end
@@ -68,8 +68,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width numbers.")
       end
-      it "販売価格が¥300~¥9999999の間以外だと出品できない" do
-        @item.price_id = "100"
+      it "販売価格が¥300以下だと出品できない" do
+        @item.price_id = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width numbers.")
+      end
+      it "販売価格が¥9999999以上だと出品できない" do
+        @item.price_id = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width numbers.")
       end
