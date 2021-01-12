@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  # before_action :Confirmation_purchaser
 
   def index
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
+    if @item.user_id == current_user.id || @item.order != nil
+      redirect_to root_path
+    end
   end
 
   def create
@@ -31,5 +35,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],    
       currency: 'jpy'                 
     )
+
+    # def Confirmation_purchaser
+    #   redirect_to root_path @item.user
+    # end
   end
 end
