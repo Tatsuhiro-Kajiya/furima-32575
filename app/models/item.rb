@@ -21,4 +21,5 @@ class Item < ApplicationRecord
   belongs_to :shopping_cost
   belongs_to :prefecture
   belongs_to :shopping_days
+  has_one :order
 end
