@@ -5,7 +5,9 @@ FactoryBot.define do
     city              {"仙台市"}
     lot_number        {"仙台1-1"}
     building_number   {"仙台ハイツ"}
-    phone_number      {12345678910}
+    phone_number      {123456789101}
+    user_id           {1}
+    item_id           {1}
     token             {"tok_abcdefghijk00000000000000000"}
   end
 end
