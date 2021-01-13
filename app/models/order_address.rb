@@ -7,7 +7,7 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :lot_number
-    validates :phone_number, format: { with: /\A\d{12}\z/, message: "is invalid. Input half-width numbers." }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: "is invalid. Input half-width numbers." }
     validates :user_id
     validates :item_id
     validates :token

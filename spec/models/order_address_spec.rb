@@ -54,6 +54,7 @@ RSpec.describe OrderAddress, type: :model do
       end
       it '電話番号が12桁以上だと保存できない' do
         @order_address.phone_number = "12345678910111"
+        binding.pry
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid. Input half-width numbers.")
       end
